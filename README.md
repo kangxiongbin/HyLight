@@ -23,9 +23,10 @@ sh install.sh
 ```
 ## Examples
 
-Illumina miseq
+Illumina miseq and ONT reads
 ```
-python ../scripts/HyLight.py -fq all_reads.fq
+python ../scripts/HyLight.py -l long_reads.fastq -s short_reads.fq --nsplit 100 -t 30  -o out_folder
+
 ```
 The input file must be interleaved FASTQ and format like below:
 ```
@@ -38,12 +39,7 @@ TTGATTATCATGCCGGAAGTGCTGCTCTTGTTCTCTGAAAGAGAAT
 +
 EEEGEHHHJHFJJJJBML2MMLNLLONNLNLOLJONOLNONNNMNF
 ```
-When a data set is big, we recommend to use the fast cluster method:
-```
-python ../scripts/HyLight.py -fq all_reads.fq -fast
 
-- The result is in the stageb folder: final_contigs.fasta
-```
 ## Possible issues during installation (optional)
 
 If `g++` version of the system is not satisfied, one could try this to install:
