@@ -5,13 +5,15 @@ Please note that HyLight is built for linux-based systems and python3 only. HyLi
 HyLight relies on the following dependencies:
 - [minimap2](https://github.com/lh3/minimap2)
 - [HaploConduct](https://github.com/HaploConduct/HaploConduct)*
+- bfc
+- fmlrc2
 - g++ >=5.5.0 and with boost libraries
 
 To install HyLight, firstly, it is recommended to intall the dependencies through [Conda](https://docs.conda.io/en/latest/):
 ```
 conda create -n HyLight
 conda activate HyLight
-conda install -c bioconda python=3.6 scipy pandas minimap2
+conda install -c bioconda python=3.6 scipy pandas minimap2 bfc 
 ```
 Subsequently, pull down the code to the directory where you want to install, and compile the code:
 ```
