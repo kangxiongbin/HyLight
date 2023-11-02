@@ -5,6 +5,7 @@ Please note that HyLight is built for linux-based systems and python3 only. HyLi
 HyLight relies on the following dependencies:
 - [bfc](https://github.com/lh3/bfc)
 - [fmlrc2](https://github.com/HudsonAlpha/fmlrc2)
+- [miniasm](https://github.com/lh3/miniasm)
 - [minimap2](https://github.com/lh3/minimap2)
 - [HaploConduct](https://github.com/HaploConduct/HaploConduct)
 - g++ >=5.5.0 and with boost libraries
