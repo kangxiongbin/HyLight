@@ -3,10 +3,10 @@ HyLight is a strain aware de novo assembly method based on the overlap-layout-co
 ## Installation and dependencies
 Please note that HyLight is built for linux-based systems and python3 only. HyLight relies on the following dependencies:
 HyLight relies on the following dependencies:
+- [bfc](https://github.com/lh3/bfc)
+- [fmlrc2](https://github.com/HudsonAlpha/fmlrc2)
 - [minimap2](https://github.com/lh3/minimap2)
-- [HaploConduct](https://github.com/HaploConduct/HaploConduct)*
-- bfc
-- fmlrc2
+- [HaploConduct](https://github.com/HaploConduct/HaploConduct)
 - g++ >=5.5.0 and with boost libraries
 
 To install HyLight, firstly, it is recommended to intall the dependencies through [Conda](https://docs.conda.io/en/latest/):
