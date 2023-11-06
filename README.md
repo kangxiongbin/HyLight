@@ -29,7 +29,7 @@ Illumina miseq and ONT reads
 python ../scripts/HyLight.py -l long_reads.fastq -s short_reads.fq --nsplit 100 -t 30  -o out_folder
 
 ```
-The input file must be interleaved FASTQ and format like below:
+The input file must be in interleaved FASTQ format. Since the final clustering step retrieves and groups reads based on their names, read names should not contain spaces. The read file should be formatted like this:
 ```
 @S0R0/1
 TATAAGTAAGGCGTTGCGAGCGGGTCGTAAAATATTTTTGATCCGT
