@@ -1,8 +1,9 @@
 # HyLight
 HyLight is a strain aware de novo assembly method based on the overlap-layout-consensus (OLC) paradigm that leverages the strengths of NGS and 3rd generation sequencing to rapidly and accurately assemble highly complex metagenomic sequencing data.
 
+
 <p align="center">
-<img src="https://github.com/kangxiongbin/HyLight/files/13275137/HiStrain_workflow.pdf" alt="HiStrain_workflow" width="500px"/>
+<img src="https://github.com/kangxiongbin/HyLight/assets/23208764/587682ca-722f-43e1-89c6-5582b8cd1f09" alt="HiStrain_workflow" width="500px"/>
 </p>
 
 ## Installation and dependencies
