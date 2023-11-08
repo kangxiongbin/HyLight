@@ -1,8 +1,0 @@
-2023-11-07 13:50:30,586 - ../script/HyLight.py[line:94] - INFO: correcting long reads with short reads
-2023-11-07 13:50:30,677 - ../script/HyLight.py[line:108] - INFO: generate overlap information among long reads
-2023-11-07 13:52:35,474 - ../script/HyLight.py[line:94] - INFO: correcting long reads with short reads
-2023-11-07 13:52:35,671 - ../script/HyLight.py[line:108] - INFO: generate overlap information among long reads
-2023-11-07 13:56:08,641 - ../script/HyLight.py[line:94] - INFO: correcting long reads with short reads
-2023-11-07 13:56:08,882 - ../script/HyLight.py[line:108] - INFO: generate overlap information among long reads
-2023-11-07 14:05:07,216 - ../script/HyLight.py[line:94] - INFO: correcting long reads with short reads
-2023-11-07 14:05:07,441 - ../script/HyLight.py[line:108] - INFO: generate overlap information among long reads
