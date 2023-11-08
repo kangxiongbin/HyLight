@@ -22,7 +22,7 @@ To install HyLight, firstly, it is recommended to intall the dependencies throug
 ```
 conda create -n HyLight
 conda activate HyLight
-conda install -c bioconda python=3.6 scipy pandas minimap2 bfc fmlrc2 miniasm
+conda install -c bioconda python=3.6 scipy pandas minimap2 bfc fmlrc2 ropebwt2 miniasm
 ```
 Subsequently, pull down the code to the directory where you want to install, and compile the code:
 ```
@@ -34,7 +34,7 @@ sh install.sh
 
 Illumina miseq and ONT reads
 ```
-python ../scripts/HyLight.py -l long_reads.fastq -s short_reads.fq --nsplit 100 -t 30  -o out_folder
+python ../script/HyLight.py -l long_reads.fq -s short_reads.fq --nsplit 100 -t 30  -o out_folder
 
 ```
 The input file must be in interleaved FASTQ format. Since the final clustering step retrieves and groups reads based on their names, read names should not contain spaces. The read file should be formatted like this:
