@@ -1,4 +1,3 @@
-import networkx as nx
 import sys
 import os 
 import logging
