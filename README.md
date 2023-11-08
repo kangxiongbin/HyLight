@@ -31,7 +31,7 @@ cd HyLight
 ```
 ## Examples
 
-Illumina miseq and ONT reads
+Illumina miseq and ONT reads. The out_folder must give the full path.
 ```
 python ../script/HyLight.py -l long_reads.fq -s short_reads.fq --nsplit 100 -t 30  -o out_folder
 
