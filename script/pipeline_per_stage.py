@@ -20,7 +20,7 @@ Pipeline for de novo viralquasispecies assembly.
 tmp_path = os.path.dirname(os.path.abspath(__file__)).split('/')
 selfpath = '/'.join(tmp_path[0:len(tmp_path)-1])
 base_path3 = os.path.split(os.path.realpath(__file__))[0]
-viralquasispecies = base_path3[:-7]+"tools/HaploConduct/bin/ViralQuasispecies"
+viralquasispecies = base_path3[:-7]+"/tools/HaploConduct/bin/ViralQuasispecies"
 
 COPYFILES = False
 
