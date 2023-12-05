@@ -64,12 +64,13 @@ def main():
                     dedup[k1] = 1
 
                 olvp_out.write(line)
+		    
+        execute("rm %s"%overlap_long)
 
     else:
     
         execute("minimap2 -t %s  -L --eqx -c --sr -DP --no-long-join -k 21 -w 11 -s 60 -m 30 -n 2 -A 4 -B 2 --end-bonus=100 %s %s 2> /dev/null 1> %s" %(threads, con, reads, overlap))
-	    
-    execute("rm %s"%overlap_long)
+
     execute("sort -nk7 -k8 -k9 -k5 %s > %s; rm %s; " %(overlap, overlap_sort, overlap))
     
     paf_file2 = os.popen("cat %s" %overlap_sort)
