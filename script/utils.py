@@ -13,7 +13,7 @@ def split_reads(fa, ref, nsplit, out_dir, out_file, bin, threads = 30, len_over 
     nu = int(os.popen("wc -l " + ref ).readline().split()[0])
     nu_sub = int(nu/(8*nsplit)+1)*8
     sub = "sub"+str(time.time())[-3:]
-    split_line = "cd %s; split %s -l %s -d -a 3 %s;" %(out_dir, ref, nu_sub, sub)
+    split_line = "cd %s; split %s -l %s -d -a 5 %s;" %(out_dir, ref, nu_sub, sub)
     execute(split_line)
     sub_overlap = [name for name in os.listdir(out_dir) if fnmatch(name, sub+"*")]
     th = 3 + int(threads/nsplit)
