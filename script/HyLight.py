@@ -143,7 +143,7 @@ def main():
     overlap2 = split_reads(infile, long_con, nsplit, outdir1, ov_long_ref, bin, threads = threads, len_over = len_over, mc = 2, iden = iden, long = True)
 
     p1 = outdir1 + "/polish1.fa"
-    execute("cd %s; racon -t 30 %s %s %s > %s;" %(outdir1, infile, ov_long_ref, long_con, p1))
+    execute("cd %s; racon -u -t 30 %s %s %s > %s;" %(outdir1, infile, ov_long_ref, long_con, p1))
     
     if(args.low_quality):
 
@@ -165,7 +165,7 @@ def main():
         overlap3 = split_reads(infile, remain_con, nsplit, outdir1, ov_long_ref2, bin, threads = threads, len_over = len_over, mc = 2, iden = iden, long = True)
     
         p2 = outdir1 + "/polish2.fa"
-        execute("cd %s; racon -t 30 %s %s %s > %s;" %(outdir1, infile, ov_long_ref2, remain_con, p2))
+        execute("cd %s; racon -u -t 30 %s %s %s > %s;" %(outdir1, infile, ov_long_ref2, remain_con, p2))
 
         con_file = os.popen("cat %s %s" %(p1, p2))
 
@@ -185,7 +185,7 @@ def main():
     overlap4 = split_reads(short_reads, long_con2, nsplit, outdir1, ov_short, bin, threads = threads, len_over = 70, mc = 3, iden = iden)
 
     long_con3 = outdir+"/long_con_polished2.fa" 
-    execute("cd %s; racon -t 30 %s %s %s > %s;" %(outdir, short_reads, ov_short, long_con2, long_con3))
+    execute("cd %s; racon -u -t 30 %s %s %s > %s;" %(outdir, short_reads, ov_short, long_con2, long_con3))
 
     remain_short = pick_up(ov_short, outdir1, short_reads)
     ov_short2 = outdir1 + "/shortr2.paf"
