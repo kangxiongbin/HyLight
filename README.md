@@ -56,23 +56,23 @@ If `g++` version of the system is not satisfied, one could try this to install:
 ```
 conda install -c conda-forge gxx_linux-64=7.3.0
 # replace the /path/to/ with your own path
-ln -s /path/to/miniconda3/envs/strainxpress/bin/x86_64-conda-cos6-linux-gnu-g++ /path/to/miniconda3/envs/strainxpress/bin/g++
-ln -s /path/to/miniconda3/envs/strainxpress/bin/x86_64-conda-cos6-linux-gnu-gcc /path/to/miniconda3/envs/strainxpress/bin/gcc
+ln -s /path/to/miniconda3/envs/HyLight/bin/x86_64-conda-cos6-linux-gnu-g++ /path/to/miniconda3/envs/HyLight/bin/g++
+ln -s /path/to/miniconda3/envs/HyLight/bin/x86_64-conda-cos6-linux-gnu-gcc /path/to/miniconda3/envs/HyLight/bin/gcc
 ```
 If `boost` library is not installed, you could try this to install:
 ```
 conda install -c conda-forge boost
 # set envionment variables
-export LD_LIBRARY_PATH=/path/to/miniconda3/envs/strainxpress/lib/:$LD_LIBRARY_PATH
-export CPATH=/path/to/miniconda3/envs/strainxpress/include/:$CPATH
+export LD_LIBRARY_PATH=/path/to/miniconda3/envs/HyLight/lib/:$LD_LIBRARY_PATH
+export CPATH=/path/to/miniconda3/envs/HyLight/include/:$CPATH
 ```
 
-If compile error occurs something like `/path/to/miniconda3/envs/strainxpress/x86_64-conda_cos6-linux-gnu/bin/ld: cannot find -lboost_timer `
+If compile error occurs something like `/path/to/miniconda3/envs/HyLight/x86_64-conda_cos6-linux-gnu/bin/ld: cannot find -lboost_timer `
 or `cannot find -lgomp`, 
  which means it fails to link `boost` or `libgomp` library, one could try this to solve:
 ```
-ln -s /path/to/miniconda3/envs/strainxpress/lib/libboost_* /path/to/miniconda3/envs/strainxpress/x86_64-conda_cos6-linux-gnu/lib/.
-ln -s /path/to/miniconda3/envs/strainxpress/lib/libgomp* /path/to/miniconda3/envs/strainxpress/x86_64-conda_cos6-linux-gnu/lib/.
+ln -s /path/to/miniconda3/envs/HyLight/lib/libboost_* /path/to/miniconda3/envs/HyLight/x86_64-conda_cos6-linux-gnu/lib/.
+ln -s /path/to/miniconda3/envs/HyLight/lib/libgomp* /path/to/miniconda3/envs/HyLight/x86_64-conda_cos6-linux-gnu/lib/.
 # then re-complile and install
 sh install.sh
 ```
