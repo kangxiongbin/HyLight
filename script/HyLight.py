@@ -55,9 +55,13 @@ def main():
         print(usage)
         parser.exit()
 
-    global bin, len_over, max_cluster_size, fastx_files
+
+    global bin, len_over, max_cluster_size, fastx_files, miniasm
     
     bin = os.path.split(os.path.realpath(__file__))[0]
+
+    miniasm = "miniasm" #In some server, you need to provide the full path of miniasm.
+
     short_reads = os.path.abspath(args.short_reads) 
     long_reads = os.path.abspath(args.long_reads)
     id = "HiStrain"
@@ -121,17 +125,17 @@ def main():
     execute("mkdir -p %s" % new_out_dir)
     out_file = new_out_dir + "/s1_s1.paf"
 
-    overlap = split_reads(fastx_files, fastx_files, nsplit, outdir1, out_file, bin, threads = threads, len_over = 3000, mc = 2, iden = iden, long = True)
+    overlap = split_reads2(fastx_files, fastx_files, nsplit, outdir1, out_file, bin, threads = threads, len_over = 6000, mc = 2, iden = iden, long = True)
 
     log.logger.info("assemble long reads with clean graph")
     long_con = outdir1+"/contigs1.fa"
     gfa = outdir1+"/contigs1.gfa"
     
     if(args.low_quality):
-        execute("cd %s;miniasm -d %s -n 3 -e 1 -c 3 -f %s %s> %s;"%(outdir1, max_tip_len, infile, overlap, gfa))
+        execute("cd %s; %s -d %s -n 3 -e 1 -c 3 -f %s %s> %s;"%(outdir1, miniasm, max_tip_len, infile, overlap, gfa))
         
     else:
-        execute("cd %s;miniasm -d %s -n 1 -e 1 -c 1 -f %s %s> %s;"%(outdir1, max_tip_len, infile, overlap, gfa))
+        execute("cd %s; %s -d %s -n 1 -e 1 -c 1 -f %s %s> %s;"%(outdir1, miniasm, max_tip_len, infile, overlap, gfa))
  
     gfa2fa(gfa, long_con)
 
@@ -140,35 +144,41 @@ def main():
     log.logger.info("generate overlap between reads and temporary reference")
     
     ov_long_ref = outdir1 + "/ov_long_ref.paf"
-    overlap2 = split_reads(infile, long_con, nsplit, outdir1, ov_long_ref, bin, threads = threads, len_over = len_over, mc = 2, iden = iden, long = True)
+    overlap2 = split_reads2(infile, long_con, nsplit, outdir1, ov_long_ref, bin, threads = threads, len_over = len_over, mc = 2, iden = iden, long = True)
 
     p1 = outdir1 + "/polish1.fa"
     execute("cd %s; racon --no-trimming -u -t 30 %s %s %s > %s;" %(outdir1, infile, ov_long_ref, long_con, p1))
     
-    if(args.low_quality):
-
-        con_file = os.popen("cat %s" %(p1))
-
-    else:
-
-        # utilize the remain long reads to generate contigs
-        remain_long = pick_up(overlap2, outdir1, infile)
-        ov_long_remain = outdir1 + "/ov_long_remain.paf"
-        overlap3 = split_reads(infile, remain_long, nsplit, outdir1, ov_long_remain, bin, threads = threads, len_over = len_over, mc = 2, iden = iden, long = True)
-
-        remain_gfa = outdir1+"/remain.gfa"
-        execute("cd %s;miniasm -d %s -n 1 -e 1 -c 1 -f %s %s> %s;"%(outdir1, max_tip_len, infile, ov_long_remain, remain_gfa))
-        remain_con = outdir1+"/remain_con.fa"
-        gfa2fa(remain_gfa, remain_con) 
+    p2 = outdir1 + "/polish2.fa"
     
-        ov_long_ref2 = outdir1 + "/ov_long_ref2.paf"
-        overlap3 = split_reads(infile, remain_con, nsplit, outdir1, ov_long_ref2, bin, threads = threads, len_over = len_over, mc = 2, iden = iden, long = True)
+    ti = 0
     
-        p2 = outdir1 + "/polish2.fa"
-        execute("cd %s; racon --no-trimming -u -t 30 %s %s %s > %s;" %(outdir1, infile, ov_long_ref2, remain_con, p2))
+    while(ti < 2):
+        if(args.low_quality):
 
-        con_file = os.popen("cat %s %s" %(p1, p2))
+            con_file = os.popen("cat %s" %(p1))
 
+        else:
+
+            # utilize the remain long reads to generate contigs
+            remain_long = pick_up(overlap2, outdir1, infile)
+            ov_long_remain = outdir1 + "/ov_long_remain.paf"
+            overlap3 = split_reads2(remain_long, remain_long, nsplit, outdir1, ov_long_remain, bin, threads = threads, len_over = len_over, mc = 2, iden = iden, long = True)
+
+            remain_gfa = outdir1+"/remain.gfa"
+            execute("cd %s;%s -d %s -n 1 -e 1 -c 1 -f %s %s> %s;"%(outdir1, miniasm, max_tip_len, infile, ov_long_remain, remain_gfa))
+            remain_con = outdir1+"/remain_con.fa"
+            gfa2fa(remain_gfa, remain_con) 
+    
+            ov_long_ref2 = outdir1 + "/ov_long_ref2.paf"
+            overlap3 = split_reads2(infile, remain_con, nsplit, outdir1, ov_long_ref2, bin, threads = threads, len_over = len_over, mc = 2, iden = iden, long = True)
+    
+
+            execute("cd %s; racon --no-trimming -u -t 30 %s %s %s >> %s; cat %s >> %s" %(outdir1, infile, ov_long_ref2, remain_con, p2, overlap3, overlap2))
+        
+            ti = ti + 1
+
+    con_file = os.popen("cat %s %s" %(p1, p2))
     long_con2 = outdir1+"/long_con_polished.fa" 
     
     with open(long_con2,'w') as longr_con:
@@ -182,14 +192,14 @@ def main():
 
     # pick up short reads for remaining strains
     ov_short = outdir1 + "/shortr1.paf"
-    overlap4 = split_reads(short_reads, long_con2, nsplit, outdir1, ov_short, bin, threads = threads, len_over = 70, mc = 3, iden = iden)
+    overlap4 = split_reads2(short_reads, long_con2, nsplit, outdir1, ov_short, bin, threads = threads, len_over = 70, mc = 3, iden = iden)
 
     long_con3 = outdir+"/long_con_polished2.fa" 
     execute("cd %s; racon --no-trimming -u -t 30 %s %s %s > %s;" %(outdir, short_reads, ov_short, long_con2, long_con3))
 
     remain_short = pick_up(ov_short, outdir1, short_reads)
     ov_short2 = outdir1 + "/shortr2.paf"
-    overlap5 = split_reads(short_reads, remain_short, nsplit, outdir1, ov_short2, bin, threads = threads, len_over = 70, mc = 3, iden = iden)
+    overlap5 = split_reads2(short_reads, remain_short, nsplit, outdir1, ov_short2, bin, threads = threads, len_over = 70, mc = 3, iden = iden)
 
 
     # assemble short reads
