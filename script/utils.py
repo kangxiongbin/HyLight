@@ -1,4 +1,3 @@
-
 import sys, re, os, copy, gzip, time
 from toolkits import *
 from multiprocessing import Pool
@@ -27,17 +26,49 @@ def split_reads(fa, ref, nsplit, out_dir, out_file, bin, threads = 30, len_over 
         cmd = ["cd %s; python %s/filter_overlap_slr.py -r %s -c %s -t %s -len %s -mc %s -iden %s; sort -k12  -T /tmp -nr %s_tmp_overlap4.paf > %s_sorted_overlap.paf; " %(out_dir, bin, fa, i, th, len_over, mc, iden, i, i) for i in sub_overlap]
 
     cmd2 = "\n".join(cmd)
-    with open('cmd_overlap.sh', 'w') as fa:
+    with open('%s/cmd_overlap.sh' %out_dir, 'w') as fa:
         fa.write(cmd2)
         fa.write("\n")
-
-    cmd_minimap = "cat cmd_overlap.sh | xargs -i -P 20 bash -c \"{}\";" 
+        
+    cmd_minimap = "cat %s/cmd_overlap.sh | xargs -i -P %s bash -c \"{}\";" %(out_dir, threads)
+    
     execute(cmd_minimap) # run the minimap2 and get the overlap file
 
     execute("cd %s; sort -T /tmp -k12 -nr --parallel %s %s*_sorted_overlap.paf > %s; rm %s*;" %(out_dir, threads, sub, out_file, sub))
 
     return(out_file)
+
+def split_reads2(fa, ref, nsplit, out_dir, out_file, bin, threads = 30, len_over = 3000, mc = 2, iden = 0.95, long = False):
+
+    # split contigs file
+    nu = int(os.popen("wc -l " + ref ).readline().split()[0])
+    nu_sub = int(nu/(8*nsplit)+1)*8
+    sub = "sub"+str(time.time())[-3:]
+    split_line = "cd %s; split %s -l %s -d -a 5 %s;" %(out_dir, ref, nu_sub, sub)
+    execute(split_line)
+    sub_overlap = [name for name in os.listdir(out_dir) if fnmatch(name, sub+"*")]
+    th = 3 + int(threads/nsplit)
     
+    if long:
+
+        cmd = ["cd %s; python %s/filter_overlap_slr2.py -r %s -c %s -t %s -len %s -mc %s -iden %s -long_reads; sort -k12  -T /tmp -nr %s_tmp_overlap4.paf > %s_sorted_overlap.paf;" %(out_dir, bin, fa, i, th, len_over, mc, iden, i, i) for i in sub_overlap]
+
+    else:
+
+        cmd = ["cd %s; python %s/filter_overlap_slr2.py -r %s -c %s -t %s -len %s -mc %s -iden %s; sort -k12  -T /tmp -nr %s_tmp_overlap4.paf > %s_sorted_overlap.paf; " %(out_dir, bin, fa, i, th, len_over, mc, iden, i, i) for i in sub_overlap]
+
+    cmd2 = "\n".join(cmd)
+    with open('%s/cmd_overlap.sh' %out_dir, 'w') as fa:
+        fa.write(cmd2)
+        fa.write("\n")
+        
+    cmd_minimap = "cat %s/cmd_overlap.sh | xargs -i -P %s bash -c \"{}\";" %(out_dir, threads)
+    
+    execute(cmd_minimap) # run the minimap2 and get the overlap file
+
+    execute("cd %s; sort -T /tmp -k12 -nr --parallel %s %s*_sorted_overlap.paf > %s; rm %s*;" %(out_dir, threads, sub, out_file, sub))
+
+    return(out_file)
 
 def execute(cmd):
     te = os.system(cmd + " 2>output.txt")
