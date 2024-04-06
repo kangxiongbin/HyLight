@@ -60,7 +60,7 @@ def main():
     
     bin = os.path.split(os.path.realpath(__file__))[0]
 
-    miniasm = "miniasm" #In some server, you need to provide the full path of miniasm.
+    miniasm = "miniasm" #In some servers, you need to provide the full path of miniasm.
 
     short_reads = os.path.abspath(args.short_reads) 
     long_reads = os.path.abspath(args.long_reads)
