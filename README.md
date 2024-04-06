@@ -50,10 +50,10 @@ TTGATTATCATGCCGGAAGTGCTGCTCTTGTTCTCTGAAAGAGAAT
 EEEGEHHHJHFJJJJBML2MMLNLLONNLNLOLJONOLNONNNMNF
 ```
 
-```
+
 The output is in fasta format for contigs. Among them, long_con_polished.fa is the assembly result of long reads. final_contigs.fa is the assembly result of both long reads and short reads. Sometimes, because the assembly result of long reads has already covered most of the genomic regions, there is no final_contigs.fa. The final assembly result is long_con_polished.fa.
 
-```
+
 
 ## Possible issues during installation (optional)
 
