@@ -113,7 +113,7 @@ def filter_non_atcg(fq, out_dir, model):
         
     return(new_out_fa)
 
-## testing functions ##
+## testing functions now##
 if __name__ == '__main__':
     # preprocess_fastx(sys.argv[1], sys.argv[2], int(sys.argv[3]), sys.argv[4], sys.argv[5])
 
