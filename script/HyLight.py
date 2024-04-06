@@ -196,7 +196,7 @@ def main():
     ov_short = outdir1 + "/shortr1.paf"
     overlap4 = split_reads2(short_reads, long_con2, nsplit, outdir1, ov_short, bin, threads = threads, len_over = 70, mc = 3, iden = iden)
 
-    long_con3 = outdir+"/long_con_polished2.fa" 
+    long_con3 = outdir+"/long_con_polished.fa" 
     execute("cd %s; racon --no-trimming -u -t 30 %s %s %s > %s;" %(outdir, short_reads, ov_short, long_con2, long_con3))
 
     remain_short = pick_up(ov_short, outdir1, short_reads)
@@ -263,7 +263,7 @@ def main():
 
     # extend the length of short and long reads contigs
     all_con = outdir + "/all_contigs.fa"
-    execute("cd %s; cat long_con_polished2.fa short_stageb.fa > %s" %(outdir, all_con))
+    execute("cd %s; cat long_con_polished.fa short_stageb.fa > %s" %(outdir, all_con))
     out_file = outdir + "/final_contigs.fa"
     extend_con(all_con, outdir1, out_file, bin, threads = 30)
  
