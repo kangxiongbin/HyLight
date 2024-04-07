@@ -52,7 +52,7 @@ def main():
 
     else:
     
-        execute("minimap2 -t %s  -L --eqx -c --sr -DP --no-long-join -k 21 -w 11 -s 60 -m 30 -n 2 -A 4 -B 2 --end-bonus=100 %s %s 2> /dev/null 1> %s" %(threads, con, reads, overlap))
+        execute("minimap2 -t %s  -L --eqx -c --sr -DP --no-long-join -k 21 -w 11 -s 60 -m 30 -n 2 -A 4 -B 2 --end-bonus=100 %s %s 2> /dev/null | python %s/filter_trans_ovlp_inline_v4.py -len 30  -oh 3 > %s " %(threads, con, reads, bin, overlap))
 		
     execute("sort -nk7 -k8 -k9 -k5 %s > %s; rm %s; " %(overlap, overlap_sort, overlap))
     
