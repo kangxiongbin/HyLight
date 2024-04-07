@@ -23,7 +23,7 @@ To install HyLight, firstly, it is recommended to intall the dependencies throug
 ```
 conda create -n HyLight
 conda activate HyLight
-conda install -c bioconda python=3.6 scipy pandas minimap2 bfc fmlrc2 ropebwt2 miniasm racon
+conda install -c bioconda python=3.6 scipy pandas minimap2 bfc fmlrc2 ropebwt2 racon
 ```
 Subsequently, pull down the code to the directory where you want to install, and compile the code:
 ```
