@@ -53,6 +53,9 @@ EEEGEHHHJHFJJJJBML2MMLNLLONNLNLOLJONOLNONNNMNF
 
 The output is long contigs (fasta format). Long_con_polished.fa is the assembly result of long reads. final_contigs.fa is the assembly result of both long reads and short reads. Sometimes, because the assembly result of long reads has already covered most of the genomic regions, there is no final_contigs.fa. The final assembly result is long_con_polished.fa.
 
+
+##Docker
+
 ```
 docker build -t hylight .
 # 1. run directly in your path with data
