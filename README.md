@@ -53,7 +53,16 @@ EEEGEHHHJHFJJJJBML2MMLNLLONNLNLOLJONOLNONNNMNF
 
 The output is long contigs (fasta format). Long_con_polished.fa is the assembly result of long reads. final_contigs.fa is the assembly result of both long reads and short reads. Sometimes, because the assembly result of long reads has already covered most of the genomic regions, there is no final_contigs.fa. The final assembly result is long_con_polished.fa.
 
+```
+docker build -t hylight .
+# 1. run directly in your path with data
+docker run -v $PWD:/$PWD -w $PWD hylight python /tools/HyLight/script/HyLight.py -l long_reads.fq -s short_reads.fq --nsplit 100 -t 30 -o out_folder
+# 2. start an interactive docker container session and run in your path with data
+docker run -it --rm -v $PWD:/wd -w /wd -v /var/run/docker.sock:/var/run/docker.sock hylight /bin/bash
+conda activate hylight
+python /tools/HyLight/script/HyLight.py -l long_reads.fq -s short_reads.fq --nsplit 100 -t 30 -o /wd/out_folder
 
+```
 
 ## Possible issues during installation (optional)
 
