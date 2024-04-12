@@ -169,6 +169,10 @@ def main():
 
             remain_gfa = outdir1+"/remain.gfa"
             execute("cd %s;%s -d %s -n 1 -e 1 -c 1 -f %s %s> %s;"%(outdir1, miniasm, max_tip_len, infile, ov_long_remain, remain_gfa))
+
+            if os.path.isfile(remain_gfa) and os.path.getsize(remain_gfa) == 0:
+                break
+
             remain_con = outdir1+"/remain_con.fa"
             gfa2fa(remain_gfa, remain_con) 
     
@@ -263,7 +267,16 @@ def main():
 
     # extend the length of short and long reads contigs
     all_con = outdir + "/all_contigs.fa"
-    execute("cd %s; cat long_con_polished.fa short_stageb.fa > %s" %(outdir, all_con))
+
+    if file_exists_and_nonempty(short_con):
+    
+        execute(f"cat {short_con} {long_con3} > {all_con}")
+    else:
+
+        execute(f"cat {fname} {long_con3} > {all_con}")
+
+#    execute("cd %s; cat long_con_polished.fa short_stageb.fa > %s" %(outdir, all_con))
+
     out_file = outdir + "/final_contigs.fa"
     extend_con(all_con, outdir1, out_file, bin, threads = 30)
  
@@ -323,6 +336,14 @@ def gfa2fa(gfa, fa):
                 header = fields[1]
                 sequence = fields[2]
                 output_file.write(f'>{header}\n{sequence}\n')
+
+def file_exists_and_nonempty(filename):
+
+    if os.path.isfile(filename) and os.path.getsize(filename) > 0:
+
+        return True
+    else:
+        return False
 
 def pick_up(ovlap, outdir, fq):
     
