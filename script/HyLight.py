@@ -179,7 +179,6 @@ def main():
             ov_long_ref2 = outdir1 + "/ov_long_ref2.paf"
             overlap3 = split_reads2(infile, remain_con, nsplit, outdir1, ov_long_ref2, bin, threads = threads, len_over = len_over, mc = 2, iden = iden, long = True)
     
-
             execute("cd %s; racon --no-trimming -u -t 30 %s %s %s >> %s; cat %s >> %s" %(outdir1, infile, ov_long_ref2, remain_con, p2, overlap3, overlap2))
         
             ti = ti + 1
