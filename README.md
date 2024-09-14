@@ -31,13 +31,8 @@ git clone https://github.com/kangxiongbin/HyLight.git
 cd HyLight
 sh install.sh
 ```
-## Examples
 
-Illumina miseq and ONT reads. The out_folder must give the full path.
-```
-python ../script/HyLight.py -l long_reads.fq -s short_reads.fq --nsplit 100 -t 30  -o <full path to the output folder>
-
-```
+## Inputs
 The input file must be in interleaved FASTQ format. Since the final clustering step retrieves and groups reads based on their names, read names should not contain spaces. The read file should be formatted like this:
 ```
 @S0R0/1
@@ -50,6 +45,15 @@ TTGATTATCATGCCGGAAGTGCTGCTCTTGTTCTCTGAAAGAGAAT
 EEEGEHHHJHFJJJJBML2MMLNLLONNLNLOLJONOLNONNNMNF
 ```
 
+## Running HyLight
+
+Illumina miseq and ONT reads. The out_folder must give the full path.
+```
+python ../script/HyLight.py -l long_reads.fq -s short_reads.fq --nsplit 100 -t 30  -o <full path to the output folder>
+
+```
+
+## Outputs
 
 The output is long contigs (fasta format). Long_con_polished.fa is the assembly result of long reads. final_contigs.fa is the assembly result of both long reads and short reads. Sometimes, because the assembly result of long reads has already covered most of the genomic regions, there is no final_contigs.fa. The final assembly result is long_con_polished.fa.
 
