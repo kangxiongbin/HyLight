@@ -10,7 +10,7 @@ The workflow of HyLight.Broadly speaking, there are three main steps. First, an 
 
 ## Installation and dependencies
 Please note that HyLight is built for linux-based systems and python3 only. HyLight relies on the following dependencies:
-HyLight relies on the following dependencies:
+
 - [bfc](https://github.com/lh3/bfc)
 - [racon](https://github.com/isovic/racon)
 - [fmlrc2](https://github.com/HudsonAlpha/fmlrc2)
