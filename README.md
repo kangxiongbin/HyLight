@@ -47,7 +47,7 @@ EEEGEHHHJHFJJJJBML2MMLNLLONNLNLOLJONOLNONNNMNF
 
 ## Running HyLight
 
-Illumina miseq and ONT reads. The out_folder must give the full path.
+We have provided a simple test dataset of Illumina MiSeq and ONT reads in the example directory to check if the software has been installed and is running correctly. Please note that the out_folder must be specified with the full path.
 ```
 python ../script/HyLight.py -l long_reads.fq -s short_reads.fq --nsplit 100 -t 30  -o <full path to the output folder>
 
