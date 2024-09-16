@@ -79,10 +79,10 @@ python /tools/HyLight/script/HyLight.py -l long_reads.fq -s short_reads.fq --nsp
 ### Parameters:
 
 - `-s`, `--short_reads`  
-  Provide short reads in **interleaved FASTQ** format.
+  Input short reads in **interleaved FASTQ** format.
 
 - `-l`, `--long_reads`  
-  Provide long reads in **FASTQ** format.
+  Input long reads in **FASTQ** format.
 
 - `-o`, `--outdir`  
   Path to output directory for the result files. A full path is required, not just a filename.
