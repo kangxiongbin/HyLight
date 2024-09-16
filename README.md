@@ -99,27 +99,27 @@ python /tools/HyLight/script/HyLight.py -l long_reads.fq -s short_reads.fq --nsp
   The number of split input FASTA/FASTQ files. If the size of the long reads data exceeds 5 GB or 10 GB, we recommend splitting the data into 1000 or more files to improve processing speed.  
   **Default:** `60`
 
-- `--min_identity` `MIN_IDENTITY`  
+- `--min_identity`
   The minimum identity for filtering overlaps. Higher values reduce error in the retained overlaps, but may also filter out useful overlaps.  
   **Default:** `0.95`
 
-- `--min_ovlp_len` `MIN_OVLP_LEN`  
+- `--min_ovlp_len` 
   The minimum overlap length between long reads. Larger values indicate stricter filtering.  
   **Default:** `3000`
 
-- `--size` `SIZE`  
+- `--size` 
   The maximum size of the cluster for short reads. This is determined by your server's performance. Since we use an overlap graph, this process is computationally intensive. Assembling too many short reads at once may slow down performance.  
   **Default:** `15000`
 
-- `--max_tip_len` `MAX_TIP_LEN`  
+- `--max_tip_len`
   The maximum length to be removed as tips.  
   **Default:** `10000`
 
-- `--insert_size` `INSERT_SIZE`  
+- `--insert_size`  
   The length of the insert size for short reads.  
   **Default:** `450`
 
-- `--average_read_len` `AVERAGE_READ_LEN`  
+- `--average_read_len`   
   The average length of short reads.  
   **Default:** `250`
 
