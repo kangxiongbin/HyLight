@@ -60,7 +60,13 @@ python ../script/HyLight.py -l long_reads.fq -s short_reads.fq --nsplit 100 -t 3
 
 ## Outputs
 
-The output is long contigs (fasta format). Long_con_polished.fa is the assembly result of long reads. final_contigs.fa is the assembly result of both long reads and short reads. Sometimes, because the assembly result of long reads has already covered most of the genomic regions, there is no final_contigs.fa. The final assembly result is long_con_polished.fa.
+- `final_contigs.fa`: Final assembly result of both long and short reads. This file is generated only if further assembly beyond `long_con_polished.fa` is required.
+
+- `long_con_polished.fa`: Assembly result of long reads after polishing. 
+
+- `short_stageb.fa`: Assembled contigs from short reads extended using a global overlap graph.
+
+- `all_contigs.fa`: Contains all contigs from both short and long reads, used to construct a global overlap graph for further extension to generate final_contigs.fa.
 
 
 ## Docker
