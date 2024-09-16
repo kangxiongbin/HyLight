@@ -99,7 +99,7 @@ python /tools/HyLight/script/HyLight.py -l long_reads.fq -s short_reads.fq --nsp
   The number of split input FASTA/FASTQ files. If the size of the long reads data exceeds 5 GB or 10 GB, we recommend splitting the data into 1000 or more files to improve processing speed.  
   **Default:** `60`
 
-- `--min_identity` 
+- `--min_identity`  
   The minimum identity for filtering overlaps. Higher values reduce error in the retained overlaps, but may also filter out useful overlaps.  
   **Default:** `0.95`
 
