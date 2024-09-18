@@ -44,12 +44,13 @@ conda install hylight -c bioconda
 hylight -h
 ```
 
-### Install by Docker
+### Docker
 
 ```
 docker build -t hylight .
 # 1. run directly in your path with data
 docker run -v $PWD:/$PWD -w $PWD hylight python /tools/HyLight/script/HyLight.py -l long_reads.fq -s short_reads.fq --nsplit 100 -t 30 -o out_folder
+
 # 2. start an interactive docker container session and run in your path with data
 docker run -it --rm -v $PWD:/wd -w /wd -v /var/run/docker.sock:/var/run/docker.sock hylight /bin/bash
 conda activate hylight
