@@ -41,7 +41,7 @@ conda install hylight -c bioconda
 
 # Then, you can test HyLight by running:
 
-hylight -h
+hylight -l long_reads.fq -s short_reads.fq --nsplit 100 -t 30 -o /wd/out_folder
 ```
 
 ### Docker
