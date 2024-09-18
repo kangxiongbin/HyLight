@@ -37,6 +37,8 @@ sh install.sh
 ```
 # You can also install Hylight with a single command using conda:
 
+conda create -n hylight
+conda activate hylight
 conda install hylight -c bioconda
 
 # Then, you can test HyLight by running:
