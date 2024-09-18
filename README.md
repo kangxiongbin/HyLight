@@ -31,7 +31,7 @@ git clone https://github.com/kangxiongbin/HyLight.git
 cd HyLight
 sh install.sh
 ```
-# Install by conda
+### Install by conda
 You can also install Hylight with a single command using conda:
 
 ```
@@ -44,7 +44,7 @@ Then, you can test HyLight by running:
 hylight -h
 ```
 
-# Install by Docker
+### Install by Docker
 
 ```
 docker build -t hylight .
