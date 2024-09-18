@@ -31,6 +31,31 @@ git clone https://github.com/kangxiongbin/HyLight.git
 cd HyLight
 sh install.sh
 ```
+# Install by conda
+You can also install Hylight with a single command using conda:
+
+```
+conda install hylight -c bioconda
+
+```
+
+Then, you can test HyLight by running:
+```
+hylight -h
+```
+
+# Install by Docker
+
+```
+docker build -t hylight .
+# 1. run directly in your path with data
+docker run -v $PWD:/$PWD -w $PWD hylight python /tools/HyLight/script/HyLight.py -l long_reads.fq -s short_reads.fq --nsplit 100 -t 30 -o out_folder
+# 2. start an interactive docker container session and run in your path with data
+docker run -it --rm -v $PWD:/wd -w /wd -v /var/run/docker.sock:/var/run/docker.sock hylight /bin/bash
+conda activate hylight
+python /tools/HyLight/script/HyLight.py -l long_reads.fq -s short_reads.fq --nsplit 100 -t 30 -o /wd/out_folder
+
+```
 
 ## Inputs
 The input file must be in interleaved FASTQ format. Since the final clustering step retrieves and groups reads based on their names, read names should not contain spaces. The read file should be formatted like this:
@@ -69,18 +94,6 @@ python ../script/HyLight.py -l long_reads.fq -s short_reads.fq --nsplit 100 -t 3
 - `all_contigs.fa`: Contains all contigs from both short and long reads, used to construct a global overlap graph for further extension to generate final_contigs.fa.
 
 
-## Docker
-
-```
-docker build -t hylight .
-# 1. run directly in your path with data
-docker run -v $PWD:/$PWD -w $PWD hylight python /tools/HyLight/script/HyLight.py -l long_reads.fq -s short_reads.fq --nsplit 100 -t 30 -o out_folder
-# 2. start an interactive docker container session and run in your path with data
-docker run -it --rm -v $PWD:/wd -w /wd -v /var/run/docker.sock:/var/run/docker.sock hylight /bin/bash
-conda activate hylight
-python /tools/HyLight/script/HyLight.py -l long_reads.fq -s short_reads.fq --nsplit 100 -t 30 -o /wd/out_folder
-
-```
 
 ### Parameters:
 
